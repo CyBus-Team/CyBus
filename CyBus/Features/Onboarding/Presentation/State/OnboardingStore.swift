@@ -21,7 +21,7 @@ struct OnboardingFeature {
     
     @ObservableState
     struct State {
-        var page: OnboardingPage = .welcome
+        var page: OnboardingPage = .logo
         var error: String?
     }
     
@@ -45,10 +45,12 @@ struct OnboardingFeature {
                     try? await Task.sleep(for: .seconds(10))
                     await send(.welcome)
                 }
+                return .none
                 
                 //Welcome
             case .welcome:
                 state.page = .welcome
+                return .none
             case .getStartTapped:
                 state.page = .geolocation
                 return .none
